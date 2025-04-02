@@ -302,4 +302,66 @@ def base_to_decimal(number, base):
         else:
             return f"Неподдерживаемая система счисления: {base}"
     except ValueError:
-        return f"Ошибка: введите корректное число в системе счисления с основанием {base}" 
+        return f"Ошибка: введите корректное число в системе счисления с основанием {base}"
+
+# Функции для перевода раскладки клавиатуры
+def create_safe_layout_maps(layout1, layout2):
+    """
+    Создает безопасные словари для преобразования между раскладками,
+    обрабатывая возможные различия в длине
+    """
+    len1, len2 = len(layout1), len(layout2)
+    if len1 != len2:
+        # Если длины разные, используем только общую часть
+        min_len = min(len1, len2)
+        layout1 = layout1[:min_len]
+        layout2 = layout2[:min_len]
+    
+    return dict(zip(layout1, layout2))
+
+# Раскладки клавиатуры
+RU_LAYOUT = "йцукенгшщзхъфывапролджэячсмитьбю.ёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"
+EN_LAYOUT = "qwertyuiop[]asdfghjkl;'zxcvbnm,./`QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?~"
+# Казахская раскладка соответствует позициям русской раскладки
+KZ_LAYOUT = "әіңғшөқұһзхъфыварполджэячсмитьбю.ёӘІҢҒШӨҚҰҺЗХЪФЫВАРПОЛДЖЭЯЧСМИТЬБЮ,Ё"
+
+# Создаем безопасные маппинги раскладок - обрабатываем возможные различия в длине
+RU_TO_EN = create_safe_layout_maps(RU_LAYOUT, EN_LAYOUT)
+EN_TO_RU = create_safe_layout_maps(EN_LAYOUT, RU_LAYOUT)
+RU_TO_KZ = create_safe_layout_maps(RU_LAYOUT, KZ_LAYOUT)
+KZ_TO_RU = create_safe_layout_maps(KZ_LAYOUT, RU_LAYOUT)
+EN_TO_KZ = create_safe_layout_maps(EN_LAYOUT, KZ_LAYOUT)
+KZ_TO_EN = create_safe_layout_maps(KZ_LAYOUT, EN_LAYOUT)
+
+def translate_layout(text, layout_map):
+    """
+    Переводит текст из одной раскладки в другую
+    """
+    result = ""
+    for char in text:
+        result += layout_map.get(char, char)
+    return result
+
+def ru_to_en(text):
+    """Конвертирует текст из русской раскладки в английскую"""
+    return translate_layout(text, RU_TO_EN)
+
+def en_to_ru(text):
+    """Конвертирует текст из английской раскладки в русскую"""
+    return translate_layout(text, EN_TO_RU)
+
+def ru_to_kz(text):
+    """Конвертирует текст из русской раскладки в казахскую"""
+    return translate_layout(text, RU_TO_KZ)
+
+def kz_to_ru(text):
+    """Конвертирует текст из казахской раскладки в русскую"""
+    return translate_layout(text, KZ_TO_RU)
+
+def en_to_kz(text):
+    """Конвертирует текст из английской раскладки в казахскую"""
+    return translate_layout(text, EN_TO_KZ)
+
+def kz_to_en(text):
+    """Конвертирует текст из казахской раскладки в английскую"""
+    return translate_layout(text, KZ_TO_EN) 

@@ -13,6 +13,7 @@ def get_main_keyboard():
     builder.add(KeyboardButton(text="🔐 AES шифрование"))
     builder.add(KeyboardButton(text="🔑 Генератор паролей"))
     builder.add(KeyboardButton(text="🔢 Конвертер систем счисления"))
+    builder.add(KeyboardButton(text="⌨️ Переводчик раскладки клавиатуры"))
     builder.add(KeyboardButton(text="❓ Помощь"))
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True, one_time_keyboard=False)
@@ -99,4 +100,17 @@ def get_base_keyboard():
     builder.add(KeyboardButton(text="16 (шестнадцатеричная)"))
     builder.add(KeyboardButton(text="🔙 Вернуться"))
     builder.adjust(2, 1, 1)
+    return builder.as_markup(resize_keyboard=True)
+
+# Клавиатура для переводчика раскладки клавиатуры
+def get_keyboard_layout_translator():
+    builder = ReplyKeyboardBuilder()
+    builder.add(KeyboardButton(text="🇷🇺→🇬🇧 Русская → Английская"))
+    builder.add(KeyboardButton(text="🇬🇧→🇷🇺 Английская → Русская"))
+    builder.add(KeyboardButton(text="🇷🇺→🇰🇿 Русская → Казахская"))
+    builder.add(KeyboardButton(text="🇰🇿→🇷🇺 Казахская → Русская"))
+    builder.add(KeyboardButton(text="🇬🇧→🇰🇿 Английская → Казахская"))
+    builder.add(KeyboardButton(text="🇰🇿→🇬🇧 Казахская → Английская"))
+    builder.add(KeyboardButton(text="🔙 Вернуться"))
+    builder.adjust(2, 2, 2, 1)
     return builder.as_markup(resize_keyboard=True) 

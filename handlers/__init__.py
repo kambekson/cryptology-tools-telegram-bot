@@ -8,6 +8,7 @@ from handlers.text_analyzer_handlers import register_text_analyzer_handlers
 from handlers.general_handlers import register_general_handlers
 from handlers.password_handlers import register_password_handlers
 from handlers.number_converter_handlers import register_number_converter_handlers
+from handlers.keyboard_layout_handlers import register_keyboard_layout_handlers
 
 def register_all_handlers(dp):
     dp = register_prime_handlers(dp)
@@ -19,6 +20,7 @@ def register_all_handlers(dp):
     dp = register_text_analyzer_handlers(dp)
     dp = register_password_handlers(dp)
     dp = register_number_converter_handlers(dp)
+    dp = register_keyboard_layout_handlers(dp)
     dp = register_general_handlers(dp)
     
     return dp 

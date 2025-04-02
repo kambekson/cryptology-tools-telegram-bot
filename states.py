@@ -57,4 +57,9 @@ class NumberConverter(StatesGroup):
     choosing_mode = State()
     waiting_for_decimal_input = State()
     waiting_for_base_input = State()
-    waiting_for_base_output = State() 
+    waiting_for_base_output = State()
+
+# FSM-состояния для переводчика раскладки клавиатуры
+class KeyboardLayoutTranslator(StatesGroup):
+    choosing_mode = State()
+    waiting_for_text = State() 
