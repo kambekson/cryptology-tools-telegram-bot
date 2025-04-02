@@ -5,12 +5,8 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 def get_main_keyboard():
     builder = ReplyKeyboardBuilder()
     builder.add(KeyboardButton(text="🔍 Сгенерировать простое число"))
-    builder.add(KeyboardButton(text="🔐 Шифр цезаря"))
-    builder.add(KeyboardButton(text="🔑 Шифр с использованием кодового слова"))
+    builder.add(KeyboardButton(text="🔐 Шифрование"))
     builder.add(KeyboardButton(text="📝 Анализатор текста"))
-    builder.add(KeyboardButton(text="🔒 RSA шифрование"))
-    builder.add(KeyboardButton(text="🔏 DES шифрование"))
-    builder.add(KeyboardButton(text="🔐 AES шифрование"))
     builder.add(KeyboardButton(text="🔑 Генератор паролей"))
     builder.add(KeyboardButton(text="🔢 Конвертер систем счисления"))
     builder.add(KeyboardButton(text="⌨️ Переводчик раскладки клавиатуры"))
@@ -35,7 +31,19 @@ def get_range_keyboard():
     builder.adjust(2, 2, 2, 1)
     return builder.as_markup(resize_keyboard=True)
 
-# Клавиатуры для шифрования
+# Клавиатура для выбора метода шифрования
+def get_encryption_methods_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.add(KeyboardButton(text="🔐 Шифр цезаря"))
+    builder.add(KeyboardButton(text="🔑 Шифр с кодовым словом"))
+    builder.add(KeyboardButton(text="🔒 RSA шифрование"))
+    builder.add(KeyboardButton(text="🔏 DES шифрование"))
+    builder.add(KeyboardButton(text="🔐 AES шифрование"))
+    builder.add(KeyboardButton(text="🔙 Вернуться"))
+    builder.adjust(2, 2, 2)
+    return builder.as_markup(resize_keyboard=True)
+
+# Клавиатуры для отдельных шифров
 def get_caesar_keyboard():
     builder = ReplyKeyboardBuilder()
     builder.add(KeyboardButton(text="Шифрование"))

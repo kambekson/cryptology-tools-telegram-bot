@@ -9,18 +9,29 @@ from handlers.general_handlers import register_general_handlers
 from handlers.password_handlers import register_password_handlers
 from handlers.number_converter_handlers import register_number_converter_handlers
 from handlers.keyboard_layout_handlers import register_keyboard_layout_handlers
+from handlers.encryption_menu_handlers import register_encryption_menu_handlers
 
 def register_all_handlers(dp):
+    # Регистрация всех обработчиков в правильном порядке
+    
+    # Общие обработчики в начале
     dp = register_prime_handlers(dp)
+    dp = register_text_analyzer_handlers(dp)
+    dp = register_password_handlers(dp)
+    dp = register_number_converter_handlers(dp)
+    dp = register_keyboard_layout_handlers(dp)
+    
+    # Сначала регистрируем меню шифрования
+    dp = register_encryption_menu_handlers(dp)
+    
+    # Затем регистрируем конкретные шифры
     dp = register_caesar_handlers(dp)
     dp = register_keyword_handlers(dp)
     dp = register_rsa_handlers(dp)
     dp = register_des_handlers(dp)
     dp = register_aes_handlers(dp)
-    dp = register_text_analyzer_handlers(dp)
-    dp = register_password_handlers(dp)
-    dp = register_number_converter_handlers(dp)
-    dp = register_keyboard_layout_handlers(dp)
+    
+    # Общий обработчик должен быть всегда последним
     dp = register_general_handlers(dp)
     
     return dp 
