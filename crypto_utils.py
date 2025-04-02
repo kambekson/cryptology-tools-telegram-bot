@@ -229,4 +229,77 @@ def analyze_text(text):
         "Частота спецсимволов:\n"
         f"{special_freq}"
     )
+
     return result 
+
+# Генератор паролей
+def generate_password(length=12, use_uppercase=True, use_lowercase=True, 
+                      use_digits=True, use_special=True):
+    """
+    Генерирует случайный пароль с заданными параметрами.
+    
+    Args:
+        length: Длина пароля (по умолчанию 12)
+        use_uppercase: Использовать ли заглавные буквы
+        use_lowercase: Использовать ли строчные буквы
+        use_digits: Использовать ли цифры
+        use_special: Использовать ли специальные символы
+        
+    Returns:
+        Строка со случайным паролем
+    """
+    charset = ""
+    
+    if use_uppercase:
+        charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if use_lowercase:
+        charset += "abcdefghijklmnopqrstuvwxyz"
+    if use_digits:
+        charset += "0123456789"
+    if use_special:
+        charset += "!@#$%^&*()-_=+[]{}|;:,.<>?/~"
+    
+    # Если ни один из типов символов не выбран, используем по умолчанию все
+    if not charset:
+        charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?/~"
+    
+    # Генерируем пароль
+    if length <= 0:
+        length = 12
+    
+    password = ''.join(random.choice(charset) for _ in range(length))
+    return password 
+
+# Функции для работы с системами счисления
+def decimal_to_base(decimal_num, base):
+    """
+    Конвертирует число из десятичной системы в указанную систему счисления
+    """
+    try:
+        decimal_num = int(decimal_num)
+        if base == 2:
+            return bin(decimal_num)[2:]  # Удаляем префикс '0b'
+        elif base == 8:
+            return oct(decimal_num)[2:]  # Удаляем префикс '0o'
+        elif base == 16:
+            return hex(decimal_num)[2:].upper()  # Удаляем префикс '0x' и преобразуем в верхний регистр
+        else:
+            return f"Неподдерживаемая система счисления: {base}"
+    except ValueError:
+        return "Ошибка: введите корректное целое число"
+
+def base_to_decimal(number, base):
+    """
+    Конвертирует число из указанной системы счисления в десятичную
+    """
+    try:
+        if base == 2:
+            return int(number, 2)
+        elif base == 8:
+            return int(number, 8)
+        elif base == 16:
+            return int(number, 16)
+        else:
+            return f"Неподдерживаемая система счисления: {base}"
+    except ValueError:
+        return f"Ошибка: введите корректное число в системе счисления с основанием {base}" 

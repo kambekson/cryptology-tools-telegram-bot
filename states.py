@@ -45,4 +45,16 @@ class AESCipher(StatesGroup):
     waiting_for_text_encrypt = State()
     waiting_for_key_encrypt = State()
     waiting_for_text_decrypt = State()
-    waiting_for_key_decrypt = State() 
+    waiting_for_key_decrypt = State()
+
+# FSM-состояния для генератора паролей
+class PasswordGenerator(StatesGroup):
+    waiting_for_length = State()
+    waiting_for_options = State()
+
+# FSM-состояния для конвертера систем счисления
+class NumberConverter(StatesGroup):
+    choosing_mode = State()
+    waiting_for_decimal_input = State()
+    waiting_for_base_input = State()
+    waiting_for_base_output = State() 
