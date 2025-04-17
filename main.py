@@ -14,6 +14,7 @@ dp = register_all_handlers(dp)
 
 # Запуск бота
 async def main():
+    print("Bot is running...")
     print("Connecting to Telegram servers...")
     try:
         await dp.start_polling(bot)
@@ -25,5 +26,7 @@ async def main():
         print("3. Try using a VPN or proxy")
 
 if __name__ == "__main__":
-    print("Бот запущен...")
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("Bot stopped by user.")

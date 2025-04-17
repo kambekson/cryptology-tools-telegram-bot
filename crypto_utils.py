@@ -3,9 +3,43 @@ from Crypto.Cipher import AES, DES
 from Crypto.PublicKey import RSA
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
+import hashlib
 import base64
 from Crypto.Cipher import PKCS1_OAEP
 from sympy import isprime
+from ecdsa import SigningKey, SECP256k1, VerifyingKey
+
+#Функции для Эллиптическая криптография
+
+def generate_elliptic_keys():
+    """
+    Генерация пары ключей (приватный и публичный) для эллиптической криптографии.
+    Возвращает ключи в hex-строке.
+    """
+    sk = SigningKey.generate(curve=SECP256k1)
+    vk = sk.verifying_key
+    return sk.to_string().hex(), vk.to_string().hex()
+
+def sign_message_elliptic(message, private_key_hex):
+    """
+    Подпись сообщения с помощью приватного ключа (в hex-формате).
+    Возвращает base64-подпись.
+    """
+    sk = SigningKey.from_string(bytes.fromhex(private_key_hex), curve=SECP256k1)
+    signature = sk.sign(message.encode(), hashfunc=hashlib.sha256)
+    return base64.b64encode(signature).decode()
+
+def verify_signature_elliptic(message, signature_b64, public_key_hex):
+    """
+    Проверка подписи с использованием публичного ключа.
+    Возвращает True, если подпись корректна, иначе False.
+    """
+    try:
+        vk = VerifyingKey.from_string(bytes.fromhex(public_key_hex), curve=SECP256k1)
+        signature = base64.b64decode(signature_b64)
+        return vk.verify(signature, message.encode(), hashfunc=hashlib.sha256)
+    except Exception:
+        return False
 
 # Функции для генерации простых чисел
 def generate_random_number(min_value, max_value):

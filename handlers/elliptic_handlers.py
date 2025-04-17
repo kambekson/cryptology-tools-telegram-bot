@@ -1,6 +1,7 @@
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import StateFilter
+
 from keyboards import get_encryption_keyboard, get_main_keyboard
 from states import EllipticState
 from crypto_utils import generate_elliptic_keys, sign_message_elliptic, verify_signature_elliptic
@@ -17,7 +18,7 @@ async def generate_keys(message: types.Message, state: FSMContext):
 
 async def start_signing(message: types.Message, state: FSMContext):
     await state.set_state(EllipticState.waiting_for_text_to_sign)
-    await message.reply("Введите текст для подписи:")
+    await message.reply("Введите текст, который нужно подписать:")
 
 async def process_sign_text(message: types.Message, state: FSMContext):
     await state.update_data(text=message.text)
@@ -28,7 +29,7 @@ async def process_private_key(message: types.Message, state: FSMContext):
     data = await state.get_data()
     text = data.get("text")
     signature = sign_message_elliptic(text, message.text.strip())
-    await message.reply(f"✍️ Подпись:\n{signature}", reply_markup=get_main_keyboard())
+    await message.reply(f"📩 Подпись:\n{signature}", reply_markup=get_main_keyboard())
     await state.clear()
 
 async def start_verification(message: types.Message, state: FSMContext):

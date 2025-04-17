@@ -10,6 +10,7 @@ def get_main_keyboard():
     builder.add(KeyboardButton(text="🔑 Генератор паролей"))
     builder.add(KeyboardButton(text="🔢 Конвертер систем счисления"))
     builder.add(KeyboardButton(text="⌨️ Переводчик раскладки клавиатуры"))
+    builder.add(KeyboardButton(text="🎲 Игра вероятности"))
     builder.add(KeyboardButton(text="❓ Помощь"))
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True, one_time_keyboard=False)
@@ -39,8 +40,9 @@ def get_encryption_methods_keyboard():
     builder.add(KeyboardButton(text="🔒 RSA шифрование"))
     builder.add(KeyboardButton(text="🔏 DES шифрование"))
     builder.add(KeyboardButton(text="🔐 AES шифрование"))
+    builder.add(KeyboardButton(text="🧮 Эллиптическая криптография"))
     builder.add(KeyboardButton(text="🔙 Вернуться"))
-    builder.adjust(2, 2, 2)
+    builder.adjust(2, 2, 2, 1)
     return builder.as_markup(resize_keyboard=True)
 
 # Клавиатуры для отдельных шифров
@@ -121,4 +123,35 @@ def get_keyboard_layout_translator():
     builder.add(KeyboardButton(text="🇰🇿→🇬🇧 Казахская → Английская"))
     builder.add(KeyboardButton(text="🔙 Вернуться"))
     builder.adjust(2, 2, 2, 1)
-    return builder.as_markup(resize_keyboard=True) 
+    return builder.as_markup(resize_keyboard=True)
+
+# Клавиатура для игры вероятности
+def get_probability_game_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.add(KeyboardButton(text="🪙 Монетка"))
+    builder.add(KeyboardButton(text="🎲 Кости"))
+    builder.add(KeyboardButton(text="🔄 Чет/нечет"))
+    builder.add(KeyboardButton(text="🔙 Вернуться"))
+    builder.adjust(2, 1)
+    return builder.as_markup(resize_keyboard=True)
+
+def get_coin_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.add(KeyboardButton(text="Кинуть монетку"))
+    builder.add(KeyboardButton(text="🔙 Вернуться"))
+    builder.adjust(1, 1)
+    return builder.as_markup(resize_keyboard=True)
+
+def get_dice_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.add(KeyboardButton(text="Кинуть кости"))
+    builder.add(KeyboardButton(text="🔙 Вернуться"))
+    builder.adjust(1, 1)
+    return builder.as_markup(resize_keyboard=True)
+
+def get_even_odd_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.add(KeyboardButton(text="Крутить рулетку"))
+    builder.add(KeyboardButton(text="🔙 Вернуться"))
+    builder.adjust(1, 1)
+    return builder.as_markup(resize_keyboard=True)

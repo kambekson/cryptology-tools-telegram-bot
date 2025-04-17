@@ -1,5 +1,19 @@
 from aiogram.fsm.state import StatesGroup, State
 
+# FSM-состояния для игры вероятности
+class ProbabilityGame(StatesGroup):
+    choosing_game = State()
+
+# FSM-состояния для шифра Эллипс кривых
+
+class EllipticState(StatesGroup):
+    choosing_mode = State()
+    waiting_for_text_to_sign = State()
+    waiting_for_private_key = State()
+    waiting_for_text_verify = State()
+    waiting_for_signature = State()
+    waiting_for_public_key = State()
+
 # FSM-состояния для шифра Цезаря
 class CaesarCipher(StatesGroup):
     choosing_mode = State()
