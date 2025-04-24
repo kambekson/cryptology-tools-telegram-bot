@@ -17,6 +17,9 @@ async def main():
     print("Bot is running...")
     print("Connecting to Telegram servers...")
     try:
+        # Удаляем webhook перед использованием polling
+        await bot.delete_webhook(drop_pending_updates=True)
+        print("Webhook deleted successfully")
         await dp.start_polling(bot)
     except Exception as e:
         print(f"Error starting bot: {e}")

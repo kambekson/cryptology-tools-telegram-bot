@@ -11,6 +11,7 @@ def get_main_keyboard():
     builder.add(KeyboardButton(text="🔒 RSA шифрование"))
     builder.add(KeyboardButton(text="🔏 DES шифрование"))
     builder.add(KeyboardButton(text="🔐 AES шифрование"))
+    builder.add(KeyboardButton(text="🧮 Эллиптическая криптография"))
     builder.add(KeyboardButton(text="🔑 Генератор паролей"))
     builder.add(KeyboardButton(text="🔢 Конвертер систем счисления"))
     builder.add(KeyboardButton(text="⌨️ Переводчик раскладки клавиатуры"))

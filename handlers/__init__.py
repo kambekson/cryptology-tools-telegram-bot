@@ -11,6 +11,7 @@ from handlers.password_handlers import register_password_handlers
 from handlers.number_converter_handlers import register_number_converter_handlers
 from handlers.keyboard_layout_handlers import register_keyboard_layout_handlers
 from handlers.encryption_menu_handlers import register_encryption_menu_handlers
+from handlers.probability_handlers import register_probability_handlers
 
 def register_all_handlers(dp):
     dp = register_prime_handlers(dp)
@@ -18,6 +19,7 @@ def register_all_handlers(dp):
     dp = register_password_handlers(dp)
     dp = register_number_converter_handlers(dp)
     dp = register_keyboard_layout_handlers(dp)
+    dp = register_probability_handlers(dp)
     
     # Сначала регистрируем меню шифрования
     dp = register_encryption_menu_handlers(dp)
@@ -28,10 +30,11 @@ def register_all_handlers(dp):
     dp = register_rsa_handlers(dp)
     dp = register_des_handlers(dp)
     dp = register_aes_handlers(dp)
+    dp = register_elliptic_handlers(dp)
     dp = register_text_analyzer_handlers(dp)
     dp = register_password_handlers(dp)
     dp = register_number_converter_handlers(dp)
     dp = register_keyboard_layout_handlers(dp)
     dp = register_general_handlers(dp)
     
-    return dp 
+    return dp
