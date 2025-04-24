@@ -76,8 +76,4 @@ class NumberConverter(StatesGroup):
 # FSM-состояния для переводчика раскладки клавиатуры
 class KeyboardLayoutTranslator(StatesGroup):
     choosing_mode = State()
-    waiting_for_text = State()
-
-# FSM-состояния для меню шифрования
-class EncryptionMenu(StatesGroup):
-    choosing_method = State() 
+    waiting_for_text = State() 

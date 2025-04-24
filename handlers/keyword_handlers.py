@@ -7,9 +7,6 @@ from states import KeywordCipher
 from crypto_utils import vigenere_encrypt_russian, vigenere_decrypt_russian
 
 async def keyword_cipher_menu(message: types.Message, state: FSMContext):
-    # Сначала очищаем предыдущее состояние, если было
-    await state.clear()
-    # Устанавливаем новое состояние
     await state.set_state(KeywordCipher.choosing_mode)
     await message.reply("Выберите режим для шифра с использованием кодового слова:",
                        reply_markup=get_keyword_cipher_keyboard())
@@ -49,7 +46,7 @@ async def process_keyword_decrypt(message: types.Message, state: FSMContext):
     await state.clear()
 
 def register_keyword_handlers(dp):
-    dp.message.register(keyword_cipher_menu, lambda message: message.text == "🔑 Шифр с кодовым словом")
+    dp.message.register(keyword_cipher_menu, lambda message: message.text == "🔑 Шифр с использованием кодового слова")
     dp.message.register(keyword_encryption_start, 
                        lambda message: message.text == "Шифрование", 
                        StateFilter(KeywordCipher.choosing_mode))

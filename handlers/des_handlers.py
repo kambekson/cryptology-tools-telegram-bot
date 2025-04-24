@@ -8,9 +8,6 @@ from states import DESCipher
 from crypto_utils import generate_des_key, des_encrypt, des_decrypt
 
 async def des_cipher_menu(message: types.Message, state: FSMContext):
-    # Сначала очищаем предыдущее состояние, если было
-    await state.clear()
-    # Устанавливаем новое состояние
     await state.set_state(DESCipher.choosing_mode)
     await message.reply("Выберите режим для DES шифрования:", reply_markup=get_encryption_keyboard())
 

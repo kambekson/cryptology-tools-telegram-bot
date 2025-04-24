@@ -7,9 +7,6 @@ from states import CaesarCipher
 from crypto_utils import caesar_encrypt_russian, caesar_decrypt_russian
 
 async def caesar_cipher_menu(message: types.Message, state: FSMContext):
-    # Сначала очищаем предыдущее состояние, если было
-    await state.clear()
-    # Устанавливаем новое состояние
     await state.set_state(CaesarCipher.choosing_mode)
     await message.reply("Выберите режим для шифра Цезаря:", reply_markup=get_caesar_keyboard())
 
@@ -56,13 +53,13 @@ async def process_caesar_key_decrypt(message: types.Message, state: FSMContext):
 def register_caesar_handlers(dp):
     dp.message.register(caesar_cipher_menu, lambda message: message.text == "🔐 Шифр цезаря")
     dp.message.register(caesar_encryption_start, 
-                      lambda message: message.text == "Шифрование", 
-                      StateFilter(CaesarCipher.choosing_mode))
+                       lambda message: message.text == "Шифрование", 
+                       StateFilter(CaesarCipher.choosing_mode))
     dp.message.register(process_caesar_text_encrypt, StateFilter(CaesarCipher.waiting_for_text_encrypt))
     dp.message.register(process_caesar_key_encrypt, StateFilter(CaesarCipher.waiting_for_key_encrypt))
     dp.message.register(caesar_decryption_start, 
-                      lambda message: message.text == "Дешифрование", 
-                      StateFilter(CaesarCipher.choosing_mode))
+                       lambda message: message.text == "Дешифрование", 
+                       StateFilter(CaesarCipher.choosing_mode))
     dp.message.register(process_caesar_text_decrypt, StateFilter(CaesarCipher.waiting_for_text_decrypt))
     dp.message.register(process_caesar_key_decrypt, StateFilter(CaesarCipher.waiting_for_key_decrypt))
     

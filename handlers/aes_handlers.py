@@ -8,9 +8,6 @@ from states import AESCipher
 from crypto_utils import generate_aes_key, aes_encrypt, aes_decrypt
 
 async def aes_cipher_menu(message: types.Message, state: FSMContext):
-    # Сначала очищаем предыдущее состояние, если было
-    await state.clear()
-    # Устанавливаем новое состояние
     await state.set_state(AESCipher.choosing_mode)
     await message.reply("Выберите режим для AES шифрования:", reply_markup=get_encryption_keyboard())
 
